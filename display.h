@@ -9,11 +9,11 @@
 class Display : public QTextEdit{
     Q_OBJECT
 private:
-    QMap<int,QString> symbols;
+    QMap<int,QChar> symbols;
     QLabel* text;
 public slots:
     void add();
-    void add(QString symbol);
+    void add(QChar symbol);
 public:
     explicit Display(QWidget *parent = nullptr);
     virtual void keyPressEvent(QKeyEvent *event);
