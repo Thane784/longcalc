@@ -24,24 +24,40 @@ bool is_number(QChar symbol){
     return(symbol.unicode() >=0x30 && symbol.unicode()<=0x39);
 }
 
-bool is_valid_number_with_zeroes(QChar pre_last, QChar last, QChar new_symbol){
-   return(!(new_symbol.unicode() == 0x30 && last.unicode() == 0x30 && !is_number(pre_last)));
+bool is_valid_number_with_zeroes(QChar pre_last, QChar last){
+   return(!(last.unicode() == 0x30 && !is_number(pre_last)));
 }
 
-void Display::add(QChar symbol){
-    QString text = this->toPlainText();
-    if(text.size()!=0){
-        QChar last = text.back();
+bool is_valid(QString text){
+    return(true);
+}
+
+bool is_valid(QString text,QChar symbol,int pos){
+    if(text.size()>=1){
+        QChar last = text[pos-1];
         if(is_number(last)){
-            if(text.size()>=2)
-                if(!is_valid_number_with_zeroes(text[text.size()-2],last,symbol))
-                    return;
+            /*
+            if(text.size()>=2 && symbol.unicode() == '0')
+                if(!is_valid_number_with_zeroes(text[text.size()-3],last))
+                    return(false);
+            */
+        }
+        else{
+
         }
     }
     else{
 
     }
-    this->insertPlainText(symbol);
+    return(true);
+}
+
+void Display::add(QChar symbol){
+    QString text = this->toPlainText();
+    int cursor_position = this->textCursor().position();
+    if(is_valid(text,symbol,cursor_position))
+        this->insertPlainText(symbol);
+
 }
 
 void Display::keyPressEvent(QKeyEvent *event){
