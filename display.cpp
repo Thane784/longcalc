@@ -33,21 +33,32 @@ bool is_valid(QString text){
 }
 
 bool is_valid(QString text,QChar symbol,int pos){
-    if(text.size()>=1){
+    int usymbol = symbol.unicode();
+    if(!is_number(symbol)){
+    if(pos>=1){
+        if(usymbol == '.'){
+            for(int i{pos-1};i>=0;--i){
+                std::cout << i << std::endl;
+                if(text[i].unicode() == '.')
+                    return(false);
+                else{
+                    if(!is_number(text[i]))
+                        break;
+                }
+            }
+        }
+        /*
         QChar last = text[pos-1];
         if(is_number(last)){
-            /*
-            if(text.size()>=2 && symbol.unicode() == '0')
-                if(!is_valid_number_with_zeroes(text[text.size()-3],last))
-                    return(false);
-            */
         }
         else{
-
         }
+        */
     }
     else{
-
+        if(usymbol == '.' || usymbol == '*' || usymbol == '/' || usymbol == '^')
+            return(false);
+    }
     }
     return(true);
 }
