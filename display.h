@@ -11,6 +11,7 @@ class Display : public QTextEdit{
 private:
     QMap<int,QChar> symbols;
     QLabel* text;
+    bool is_valid(int key);
 public slots:
     void add();
     void add(QChar symbol);
