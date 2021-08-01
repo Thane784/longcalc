@@ -10,6 +10,7 @@ CONFIG += c++11
 
 SOURCES += \
     display.cpp \
+    eqchar.cpp \
     keyboard.cpp \
     longcalc.cpp \
     main.cpp \
@@ -17,6 +18,7 @@ SOURCES += \
 
 HEADERS += \
     display.h \
+    eqchar.h \
     keyboard.h \
     longcalc.h \
     mainwindow.h

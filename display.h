@@ -6,18 +6,20 @@
 #include <QTextEdit>
 #include <iostream>
 
+#include "eqchar.h"
+
 class Display : public QTextEdit{
     Q_OBJECT
 private:
-    QMap<int,QChar> symbols;
-    QLabel* text;
-    bool is_valid(int key);
-public slots:
-    void add();
-    void add(QChar symbol);
+    QVector<QChar> symbols = {'+','(','^',')','=','-','*','/','.'};
+    void add(EQChar symbol);
+    //QLabel* text;
+    //bool is_valid(int key);
 public:
     explicit Display(QWidget *parent = nullptr);
     virtual void keyPressEvent(QKeyEvent *event);
+public slots:
+    void add();
 signals:
 };
 

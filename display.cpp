@@ -1,37 +1,40 @@
 #include <QPushButton>
 #include <QKeyEvent>
-#include <QMap>
 #include <iostream>
 
 #include "display.h"
+#include "eqstring.h"
 
-
-Display::Display(QWidget *parent) : QTextEdit(parent){
-    symbols = {{Qt::Key_Plus,'+'},{Qt::Key_ParenLeft,'('},{Qt::Key_AsciiCircum,'^'},{Qt::Key_ParenRight,')'},{Qt::Key_Equal ,'='},{Qt::Key_Minus,'-'},{Qt::Key_Asterisk,'*'},{Qt::Key_Slash,'/'},{Qt::Key_Period,'.'}};
-    for(int i{0};i<10;++i){
-        char temp{i+0x30};
-        symbols.insert(0x30+i,temp);
-    }
-    //QChar::number(i)
-}
+Display::Display(QWidget *parent) : QTextEdit(parent){}
 
 void Display::add(){
-    QChar symbol = qobject_cast<QPushButton*>(sender())->text()[0];
+    EQChar symbol = qobject_cast<QPushButton*>(sender())->text()[0];
     add(symbol);
 }
 
-bool is_number(QChar symbol){
-    return(symbol.unicode() >=0x30 && symbol.unicode()<=0x39);
+void Display::keyPressEvent(QKeyEvent *event){
+    /*
+    EQChar symbol = event->key();
+    if(symbol.is_valid()){
+        add(symbols[symbol]);
+    }
+    */
 }
 
-bool is_operator(QChar symbol){
-    const QList<QChar> values{'+','-','/','*','^'};
-    return(values.indexOf(symbol) != -1);
+void Display::add(EQChar symbol){
+    EQString text = this->toPlainText();
+    int cursor_position = this->textCursor().position();
+    if(symbol.is_operator() && text[cursor_position-1].is_operator()){
+        this->textCursor().deletePreviousChar();
+        this->insertPlainText(symbol);
+        return;
+    }
+    //if(is_valid(text,symbol,cursor_position))
+    this->insertPlainText(symbol);
+
 }
 
-bool is_parenthesis(QChar symbol){
-    return(symbol.unicode() == '(' || symbol.unicode() == ')');
-}
+/*
 
 bool is_valid(QString text){
     return(true);
@@ -88,22 +91,8 @@ bool is_valid(QString text,QChar symbol,int pos){
     return(true);
 }
 
-void Display::add(QChar symbol){
-    QString text = this->toPlainText();
-    int cursor_position = this->textCursor().position();
-    if(is_operator(symbol) && is_operator(text[cursor_position-1])){
-        this->textCursor().deletePreviousChar();
-        this->insertPlainText(symbol);
-        return;
-    }
-    if(is_valid(text,symbol,cursor_position))
-        this->insertPlainText(symbol);
 
-}
 
-void Display::keyPressEvent(QKeyEvent *event){
-    auto symbol = event->key();
-    if(is_valid(symbol)){
-        add(symbols[symbol]);
-    }
-}
+
+
+*/
