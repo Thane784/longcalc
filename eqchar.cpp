@@ -3,7 +3,7 @@
 #include <QVector>
 
 bool EQChar::is_number(){
-    return((*this).unicode() >=0x30 && (*this).unicode()<=0x39);
+    return((*this).unicode() >='0' && (*this).unicode()<='9');
 }
 
 bool EQChar::is_operator(){
