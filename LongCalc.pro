@@ -10,14 +10,20 @@ CONFIG += c++11
 
 SOURCES += \
     display.cpp \
+    eqchar.cpp \
+    eqstring.cpp \
     keyboard.cpp \
+    logic.cpp \
     longcalc.cpp \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
     display.h \
+    eqchar.h \
+    eqstring.h \
     keyboard.h \
+    logic.h \
     longcalc.h \
     mainwindow.h
 

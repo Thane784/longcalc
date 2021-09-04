@@ -1,3 +1,4 @@
+
 #include <QGridLayout>
 #include <QPushButton>
 #include <QApplication>
@@ -8,11 +9,11 @@
 Keyboard::Keyboard(Display* display,QWidget *parent) : QWidget(parent){
     QGridLayout *grid = new QGridLayout(this);
     grid->setSpacing(2);
-    QList<QString> values({"(", "1", "2", "3", "*",
+    const QList<QString> values{"(", "1", "2", "3", "<-",
       ")", "4", "5", "6", "-",
       "^","7", "8", "9", "+",
-      "000","0", "/", ".", "="
-    });
+      ".","/", "*", "0", "="
+    };
     int count{0};
     for (int i{0}; i<4; ++i) {
         for (int j{0}; j<5; ++j) {
