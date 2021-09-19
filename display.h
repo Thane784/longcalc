@@ -7,6 +7,7 @@
 #include <iostream>
 
 #include "eqchar.h"
+#include "eqstring.h"
 
 class Display : public QTextEdit{
     Q_OBJECT
@@ -15,6 +16,7 @@ private:
                                        '1','2','3','4','5','6','7','8','9'};
     EQChar get_symbol(int key);
     void add(EQChar symbol);
+    void update_result(EQString text);
     //QLabel* text;
     //bool is_valid(int key);
 public:

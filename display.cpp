@@ -3,10 +3,14 @@
 #include <iostream>
 
 #include "display.h"
-#include "eqstring.h"
 #include "logic.h"
 
 Display::Display(QWidget *parent) : QTextEdit(parent){
+}
+
+void Display::update_result(EQString text){
+    EQString new_text = calculate(text);
+    this->setText(new_text);
 }
 
 EQChar Display::get_symbol(int key){
@@ -23,7 +27,7 @@ void Display::add(){
     if(required_symbols.indexOf(symbol) != -1)
         add(symbol);
     if(symbol == '=')
-        calculate(this->toPlainText());
+        update_result(this->toPlainText());
     if(symbol == '<')
         this->textCursor().deletePreviousChar();
 }
@@ -31,7 +35,7 @@ void Display::add(){
 void Display::keyPressEvent(QKeyEvent *event){
     int key = event->key();
     if(key == Qt::Key_Equal)
-        calculate(this->toPlainText());
+        update_result(this->toPlainText());
     if(key == Qt::Key_Backspace)
         this->textCursor().deletePreviousChar();
     if(key == Qt::Key_Left)
@@ -51,7 +55,7 @@ void Display::keyPressEvent(QKeyEvent *event){
 void Display::add(EQChar symbol){
     EQString text = this->toPlainText();
     int cursor_position = this->textCursor().position();
-    if(symbol.is_operator()&& text.size()>=1){
+    if(symbol.is_operator()&& cursor_position>=1){
         if(text[cursor_position-1].is_operator())
             this->textCursor().deletePreviousChar();
     }
