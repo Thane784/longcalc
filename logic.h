@@ -3,6 +3,6 @@
 
 #include "eqstring.h"
 
-EQString calculate(EQString text);
+EQString calculate(const EQString& text);
 
 #endif // LOGIC_H

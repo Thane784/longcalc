@@ -8,12 +8,12 @@
 Display::Display(QWidget *parent) : QTextEdit(parent){
 }
 
-void Display::update_result(EQString text){
+void Display::update_result(const EQString& text){
     EQString new_text = calculate(text);
     this->setText(new_text);
 }
 
-EQChar Display::get_symbol(int key){
+EQChar Display::get_symbol(int key) const{
     for(auto symbol : required_symbols){
         if(symbol.unicode() == key){
             return(symbol);
@@ -52,7 +52,7 @@ void Display::keyPressEvent(QKeyEvent *event){
     }
 }
 
-void Display::add(EQChar symbol){
+void Display::add(const EQChar& symbol){
     EQString text = this->toPlainText();
     int cursor_position = this->textCursor().position();
     if(symbol.is_operator()&& cursor_position>=1){

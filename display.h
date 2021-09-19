@@ -12,11 +12,14 @@
 class Display : public QTextEdit{
     Q_OBJECT
 private:
-    QVector<QChar> required_symbols = {'+','(','^',')','-','*','/','.','0',
+    QVector<QChar> required_symbols = {'+','-','*','/','0',
                                        '1','2','3','4','5','6','7','8','9'};
-    EQChar get_symbol(int key);
-    void add(EQChar symbol);
-    void update_result(EQString text);
+    /*
+    QVector<QChar> required_symbols = {'+','(','^',')','-','*','/','.','0',
+                                       '1','2','3','4','5','6','7','8','9'};*/
+    EQChar get_symbol(int key) const;
+    void add(const EQChar& symbol);
+    void update_result(const EQString& text);
     //QLabel* text;
     //bool is_valid(int key);
 public:

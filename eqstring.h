@@ -8,7 +8,7 @@
 class EQString : public QString{
 public:
     EQString(QString str):QString(str){}
-    EQChar operator[](int n){return(QString::operator[](n));}
+    EQChar operator[](int n) const{return(QString::operator[](n));}
 };
 
 #endif // EQSTRING_H

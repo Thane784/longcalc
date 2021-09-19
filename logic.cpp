@@ -2,22 +2,22 @@
 #include "binary_tree.h"
 #include <QMap>
 
-QMap<EQString,EQChar> lex(EQString text){
+QMap<EQString,EQChar> lex(const EQString& text){
     QMap<EQString,EQChar> tokens;
     return(tokens);
 }
 
-binary_tree<EQString> build_tree(QMap<EQString,EQChar> tokens){
+binary_tree<EQString> build_tree(const QMap<EQString,EQChar>& tokens){
     binary_tree<EQString> tree;
     return(tree);
 }
 
-EQString calculate(binary_tree<EQString> tree){
+EQString calculate(const binary_tree<EQString>& tree){
     EQString result{"100500"};
     return(result);
 }
 
-EQString calculate(EQString text){
+EQString calculate(const EQString& text){
     QMap<EQString,EQChar> tokens = lex(text);
     try {
         binary_tree<EQString> tree = build_tree(tokens);
