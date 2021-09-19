@@ -19,6 +19,7 @@ SOURCES += \
     mainwindow.cpp
 
 HEADERS += \
+    binary_tree.h \
     display.h \
     eqchar.h \
     eqstring.h \
