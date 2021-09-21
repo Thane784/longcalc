@@ -1,8 +1,8 @@
 #ifndef LOGIC_H
 #define LOGIC_H
 
-#include "eqstring.h"
+#include <QString>
 
-EQString calculate(const EQString& text);
+QString calculate(const QString& text);
 
 #endif // LOGIC_H

@@ -10,8 +10,6 @@ CONFIG += c++11
 
 SOURCES += \
     display.cpp \
-    eqchar.cpp \
-    eqstring.cpp \
     keyboard.cpp \
     logic.cpp \
     longcalc.cpp \
@@ -21,8 +19,6 @@ SOURCES += \
 HEADERS += \
     binary_tree.h \
     display.h \
-    eqchar.h \
-    eqstring.h \
     keyboard.h \
     logic.h \
     longcalc.h \

@@ -8,12 +8,14 @@
 Display::Display(QWidget *parent) : QTextEdit(parent){
 }
 
-void Display::update_result(const EQString& text){
-    EQString new_text = calculate(text);
+void Display::update_result(const QString& text){
+    QString new_text = calculate(text);
     this->setText(new_text);
+    if(this->toPlainText().size()>=1)
+        this->moveCursor(QTextCursor::End);
 }
 
-EQChar Display::get_symbol(int key) const{
+QChar Display::get_symbol(int key) const{
     for(auto symbol : required_symbols){
         if(symbol.unicode() == key){
             return(symbol);
@@ -23,7 +25,7 @@ EQChar Display::get_symbol(int key) const{
 }
 
 void Display::add(){
-    EQChar symbol = qobject_cast<QPushButton*>(sender())->text()[0];
+    QChar symbol = qobject_cast<QPushButton*>(sender())->text()[0];
     if(required_symbols.indexOf(symbol) != -1)
         add(symbol);
     if(symbol == '=')
@@ -39,24 +41,24 @@ void Display::keyPressEvent(QKeyEvent *event){
     if(key == Qt::Key_Backspace)
         this->textCursor().deletePreviousChar();
     if(key == Qt::Key_Left)
-        this->textCursor().movePosition(QTextCursor::PreviousCharacter);
+        this->moveCursor(QTextCursor::Left);
     if(key == Qt::Key_Right)
-        this->textCursor().movePosition( this->textCursor().Right);
+        this->moveCursor(QTextCursor::Right);
     if(key == Qt::Key_Up)
-        this->textCursor().movePosition( this->textCursor().Up);
+        this->moveCursor(QTextCursor::Up);
     if(key == Qt::Key_Down)
-        this->textCursor().movePosition( this->textCursor().Down);
+        this->moveCursor(QTextCursor::Down);
     QChar symbol{get_symbol(key)};
     if(symbol != 0){
         add(symbol);
     }
 }
 
-void Display::add(const EQChar& symbol){
-    EQString text = this->toPlainText();
+void Display::add(const QChar& symbol){
+    QString text = this->toPlainText();
     int cursor_position = this->textCursor().position();
-    if(symbol.is_operator()&& cursor_position>=1){
-        if(text[cursor_position-1].is_operator())
+    if(symbol.isSymbol()&& cursor_position>=1){
+        if(text[cursor_position-1].isSymbol())
             this->textCursor().deletePreviousChar();
     }
     this->insertPlainText(symbol);
