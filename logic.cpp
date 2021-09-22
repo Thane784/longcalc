@@ -1,27 +1,39 @@
 #include "logic.h"
 #include "binary_tree.h"
 #include <QMap>
-#include <iostream>
+
+// Debug
+#include <QTextStream>
+QTextStream cout(stdout);
+QTextStream cin(stdin);
 
 typedef QVector<QPair<QString,QString>> Tokens;
+
+bool is_operator(QChar symbol){
+    const QVector<QChar> operators = {'*','+','-','/'};
+    return(operators.indexOf(symbol)!= -1);
+}
 
 Tokens lex(const QString& text){
     Tokens tokens;
     QString current_number;
     for (int i{0};i<text.size();++i){
         QChar symbol{text[i]};
-           if(symbol.isNumber()){
-               current_number += symbol;
-           }
-           else{
-               if(current_number.size() != 0){
-                   tokens.push_back(QPair<QString,QString>{"num",current_number});
-               }
-               current_number = "";
-           }
-           if(symbol.isSymbol()){
-               tokens.push_back(QPair<QString,QString>{"operator",symbol});
-           }
+        if(symbol.isNumber()){
+            current_number += symbol;
+        }
+        else{
+            if(current_number.size() != 0){
+                tokens.push_back(QPair<QString,QString>{"num",current_number});
+            }
+            current_number = "";
+        }
+        if(is_operator(symbol)){
+            tokens.push_back(QPair<QString,QString>{"operator",symbol});
+        }
+    }
+    if(current_number.size() != 0){
+        tokens.push_back(QPair<QString,QString>{"num",current_number});
     }
     return(tokens);
 }
@@ -38,9 +50,8 @@ QString calculate(const binary_tree<QString>& tree){
 
 QString calculate(const QString& text){
     Tokens tokens = lex(text);
-    /*for(auto& pair: tokens)
-        std::cout << pair.first << " " << pair.second << "\n";
-    */
+    for(auto& pair: tokens)
+        cout << pair.first << " " << pair.second << "\n";
     try {
         binary_tree<QString> tree = parse(tokens);
         QString result = calculate(tree);
