@@ -17,8 +17,8 @@ SOURCES += \
     mainwindow.cpp
 
 HEADERS += \
-    binary_tree.h \
     display.h \
+    green_white_tree.h \
     keyboard.h \
     logic.h \
     longcalc.h \

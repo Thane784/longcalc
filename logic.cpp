@@ -1,6 +1,4 @@
 #include "logic.h"
-#include "binary_tree.h"
-#include <QMap>
 
 // Debug
 #include <QTextStream>
@@ -38,12 +36,12 @@ Tokens lex(const QString& text){
     return(tokens);
 }
 
-binary_tree<QString> parse(Tokens & tokens){
-    binary_tree<QString> tree;
+tree<QString> parse(Tokens & tokens){
+    tree<QString> tree{"num","",sides::ROOT,nullptr};
     return(tree);
 }
 
-QString calculate(const binary_tree<QString>& tree){
+QString calculate(const tree<QString>& tree){
     QString result{"100500"};
     return(result);
 }
@@ -53,7 +51,7 @@ QString calculate(const QString& text){
     for(auto& pair: tokens)
         cout << pair.first << " " << pair.second << "\n";
     try {
-        binary_tree<QString> tree = parse(tokens);
+        tree<QString> tree = parse(tokens);
         QString result = calculate(tree);
         return(result);
     }
